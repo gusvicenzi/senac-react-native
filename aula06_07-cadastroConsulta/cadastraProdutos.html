@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/cadastra.css">
-
+    <script src="./asdfas"></script>
     <title>Consulta Vendas</title>
 </head>
 
@@ -30,6 +30,13 @@
         </div>
         
         <button onclick="gravar(categoria, modelo, fabricante)">Gravar</button>
+        <hr>
+        <div class="inputItem">
+            <label for="idApagar">Apagar produto:</label>
+            <input type="number" id="idApagar" placeholder="Ex: ASUS" title="Digite o id do produto que deseja excluir" min="0" step="1">
+        </div>
+
+        <button class="apagar" onclick="apagarProduto(idApagar)">Apagar item</button>
     </main>
 
     <script>
@@ -73,6 +80,12 @@
                 headers: { "Content-type": "application/json; charset=UTF-8" }
             })
         }
+
+        function apagarProduto(idApagar) {
+            fetch("http://localhost:3000/produtos/" + idApagar.value, {
+                method: "DELETE"
+            })
+        } 
     </script>
 </body>
 

@@ -28,6 +28,13 @@
         </div>
         
         <button onclick="gravar(nome, email, fone)">Gravar</button>
+        <hr>
+        <div class="inputItem">
+            <label for="idApagar">Apagar cliente:</label>
+            <input type="number" id="idApagar" placeholder="Ex: ASUS" title="Digite o id do produto que deseja excluir" min="0" step="1">
+        </div>
+        <button onclick="apagarCliente(idApagar)">Apagar item</button>
+
     </main>
 
     <script>
@@ -71,6 +78,12 @@
                 headers: { "Content-type": "application/json; charset=UTF-8" }
             })
         }
+
+        function apagarCliente(idApagar) {
+            fetch("http://localhost:3000/clientes/" + idApagar.value, {
+                method: "DELETE"
+            })
+        } 
 
 
     </script>
