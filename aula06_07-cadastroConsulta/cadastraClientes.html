@@ -2,91 +2,85 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles/cadastra.css">
-    <title>Consulta Vendas</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/cadastra.css">
+  <!-- Fontawesome (icons) -->
+  <script src="https://kit.fontawesome.com/eb2e89ba7a.js" crossorigin="anonymous"></script>
+  <title>Consulta Vendas</title>
 </head>
 
 <body>
-    <header>
-        <h1>Cadastrar Clientes</h1>
-    </header>
-    
-    <main>
-        <div class="inputItem">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" placeholder="Ex: Jaime Jubileu" title="Digite o nome" autofocus>
-        </div>
-        <div class="inputItem">
-            <label for="email">Email:</label>
-            <input type="email" id="email" placeholder="Ex: jubileu@jaime.com" title="Digite o e-mail" >
-        </div>
-        <div class="inputItem">
-            <label for="fone">Telefone:</label>
-            <input type="tel" id="fone" placeholder="Ex: (XX) XXXXX-XXXX" title="Digite o telefone" >
-        </div>
-        
-        <button onclick="gravar(nome, email, fone)">Gravar</button>
-        <hr>
-        <div class="inputItem">
-            <label for="idApagar">Apagar cliente:</label>
-            <input type="number" id="idApagar" placeholder="Ex: ASUS" title="Digite o id do produto que deseja excluir" min="0" step="1">
-        </div>
-        <button onclick="apagarCliente(idApagar)">Apagar item</button>
+  <header>
+    <h1>Cadastrar Clientes</h1>
+  </header>
 
-    </main>
+  <main>
+    <div class="inputItem">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" placeholder="Ex: Jaime Jubileu" title="Digite o nome">
+    </div>
+    <div class="inputItem">
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Ex: jubileu@jaime.com" title="Digite o e-mail">
+    </div>
+    <div class="inputItem">
+      <label for="fone">Telefone:</label>
+      <input type="tel" id="fone" placeholder="Ex: (XX) XXXXX-XXXX" title="Digite o telefone">
+    </div>
 
-    <script>
-        function display(obj) {
-            let linha = "<tr>"
-            for (let prop in obj) {
-                linha += `<td>${obj[prop]}</td>`
-            }
-            linha += "</tr>"
-            // console.log(linha);
-            return linha
+    <button onclick="gravar(nome, email, fone)">Gravar</button>
+
+  </main>
+
+  <script>
+    function display(obj) {
+      let linha = "<tr>"
+      for (let prop in obj) {
+        linha += `<td>${obj[prop]}</td>`
+      }
+      linha += "</tr>"
+      // console.log(linha);
+      return linha
+    }
+
+    function gravar(nome, email, fone) {
+      if (!nome.value) {
+        alert("Digite o nome")
+        nome.focus()
+        return
+      } else if (!email.value) {
+        alert("Digite o e-mail")
+        email.focus()
+        return
+      } else if (!fone.value) {
+        alert("Digite o telefone")
+        fone.focus()
+        return
+      }
+
+      const objeto = {
+        nome: nome.value,
+        email: email.value,
+        fone: fone.value
+      }
+
+      fetch("http://localhost:3000/clientes", {
+        method: "POST",
+        body: JSON.stringify(objeto),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8"
         }
+      })
+      parent.document.getElementsByTagName("iframe")[0].src = "cadastraClientes.html"
+    }
 
-        function gravar(nome, email, fone) {
-
-            if (!nome.value) {
-                alert("Digite o nome")
-                nome.focus()
-                return
-            } else if (!email.value) {
-                alert("Digite o e-mail")
-                email.focus()
-                return
-            } else if (!fone.value) {
-                alert("Digite o telefone")
-                fone.focus()
-                return
-            }
-
-            const objeto = {
-                nome: nome.value,
-                email: email.value,
-                fone: fone.value
-            }
-
-            console.log(objeto);
-
-            fetch("http://localhost:3000/clientes", {
-                method: "POST",
-                body: JSON.stringify(objeto),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
-            })
-        }
-
-        function apagarCliente(idApagar) {
-            fetch("http://localhost:3000/clientes/" + idApagar.value, {
-                method: "DELETE"
-            })
-        } 
-
-
-    </script>
+    function apagarCliente(idApagar) {
+      fetch("http://localhost:3000/clientes/" + idApagar.value, {
+        method: "DELETE"
+      })
+    }
+  </script>
 </body>
 
 </html>

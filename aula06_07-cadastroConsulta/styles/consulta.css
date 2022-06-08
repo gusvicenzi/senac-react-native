@@ -1,68 +1,119 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    --background: #DBDFFD;
-    --dark-blue: #242F9B;
-    --blue: #646FD4;
-    --light-blue: #9BA3EB;
+  --background: #dbdffd;
+  --dark-blue: #242f9b;
+  --blue: #646fd4;
+  --light-blue: #9ba3eb;
 }
 
 body {
-    background-color: var(--background);
+  background-color: var(--background);
 }
 
 header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-header>h1 {
-    color: var(--dark-blue);
-    border: solid 5px;
-    border-radius: 1rem;
-    margin: 3rem auto;
-    width: 20rem;
-    padding: 1rem;
-    text-align: center;
+header > h1 {
+  color: var(--dark-blue);
+  border: solid 5px;
+  border-radius: 1rem;
+  margin: 3rem auto;
+  width: 20rem;
+  padding: 1rem;
+  text-align: center;
 }
 
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-main>table {
-    width: 30rem;
-    border: solid 5px var(--dark-blue);
-    border-radius: 1rem;
-    padding: 1rem;
+main > table {
+  width: 40rem;
+  border: solid 5px var(--dark-blue);
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 main > table > thead {
-    color: var(--dark-blue);
-    font-size: 1.3rem;
+  color: var(--dark-blue);
+  font-size: 1.3rem;
 }
 
 main > table > tbody {
-    color: var(--blue);
-    font-size: 1.1rem;
+  color: var(--blue);
+  font-size: 1.2rem;
 }
 
-main > table> tbody > tr > td:nth-child(4) {
-    text-align: center;
+main > table > tbody > tr > td {
+  padding: 0.2rem 0;
 }
 
-main > hr {
-    width: 100%;
-    margin: 2rem 0;
-    background-color: var(--dark-blue);
-    height: 5px;
-    border-radius: 5px;
-    border-style: none;
+main > table > tbody > tr > td:nth-child(4),
+main > table > tbody > tr > td:nth-child(5),
+main > table > tbody > tr > td:nth-child(6) {
+  text-align: center;
+}
+
+main tr > td > button {
+  background-color: transparent;
+  color: var(--dark-blue);
+  border: none;
+  font-size: 1.2rem;
+}
+
+main > #editarItem > .edicao > button {
+  background-color: var(--dark-blue);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+
+  font-size: 1rem;
+  color: var(--background);
+}
+
+main button:hover {
+  filter: brightness(1.3);
+  cursor: pointer;
+}
+
+main i:hover {
+  cursor: pointer;
+}
+
+main > #editarItem > .edicao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 20rem;
+  margin-top: 2rem;
+  border: solid 5px var(--dark-blue);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+main > #editarItem > .edicao > .inputItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+main > #editarItem > .edicao > .inputItem > input {
+  flex-grow: 1;
+  margin-left: 0.5rem;
+  border-style: none;
+  padding: 0.5rem;
+  border-radius: 3px;
+  color: var(--light-blue);
 }
