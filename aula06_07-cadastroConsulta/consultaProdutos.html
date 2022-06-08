@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta Vendas</title>
+    <link rel="stylesheet" href="./styles/consulta.css">
+</head>
+
+<body onload="load()">
+
+    <header>
+        <h1>Consultar Produtos</h1>
+    </header>
+
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Modelo</th>
+                    <th>Fabricante</th>
+                    <th>id</th>
+                </tr>
+            </thead>
+            <tbody>
+    
+            </tbody>
+        </table>
+    </main>
+
+
+
+    <script>
+        function load() {
+            fetch("http://localhost:3000/produtos")
+                .then(x => x.json())
+                .then(y => {
+                    let tabela = document.getElementsByTagName('tbody')[0]
+                    tabela.innerHTML = ""
+                    y.forEach(dado => {
+                        let item = display(dado)
+                        tabela.innerHTML += item
+                    })
+                })
+                .catch(e => console.log(`Deu ruim: ${e}`))
+        }
+
+        function display(obj) {
+            let linha = "<tr>"
+            for (let prop in obj) {
+                linha += `<td>${obj[prop]}</td>`
+            }
+            linha += "</tr>"
+            // console.log(linha);
+            return linha
+        }
+    </script>
+</body>
+
+</html>

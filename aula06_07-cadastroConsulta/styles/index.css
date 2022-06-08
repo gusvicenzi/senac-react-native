@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    --background: #DBDFFD;
+    --dark-blue: #242F9B;
+    --blue: #646FD4;
+    --light-blue: #9BA3EB;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: sans-serif;
+}
+
+iframe {
+    height: 100vh;
+}
+
+nav {
+    height: 3.2rem;
+    background-color: var(--dark-blue);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav > a {
+    color: var(--background);
+    text-decoration: none;
+    border: solid 1px;
+    border-radius: 5px;
+    padding: .3rem;
+}
+
+nav > a:hover {
+    filter: brightness(1.3);
+}
