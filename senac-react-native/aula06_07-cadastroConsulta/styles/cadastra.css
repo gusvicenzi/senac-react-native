@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  --background: #dbdffd;
+  --dark-blue: #242f9b;
+  --blue: #646fd4;
+  --light-blue: #9ba3eb;
+}
+
+body {
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Lucida Sans', Verdana, sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header > h1 {
+  color: var(--dark-blue);
+  border: solid 5px;
+  border-radius: 1rem;
+  margin: 3rem auto;
+  width: 20rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+main {
+  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: var(--dark-blue);
+  border: solid 5px;
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 1.2rem;
+}
+
+main > .inputItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+main > .inputItem > input {
+  flex-grow: 1;
+  margin-left: 0.5rem;
+  border-style: none;
+  padding: 0.5rem;
+  border-radius: 3px;
+  color: var(--light-blue);
+}
+
+main > button {
+  background-color: var(--dark-blue);
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+
+  font-size: 1rem;
+  color: var(--background);
+}
+
+main > button:hover {
+  filter: brightness(1.3);
+}

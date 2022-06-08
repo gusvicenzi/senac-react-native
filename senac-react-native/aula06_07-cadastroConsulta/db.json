@@ -1,0 +1,48 @@
+{
+  "clientes": [
+    {
+      "nome": "José da Silva",
+      "email": "jose@gmail.com",
+      "fone": "1234-5678",
+      "id": 1
+    },
+    {
+      "nome": "Maria da Silva",
+      "email": "maria@gmail.com",
+      "fone": "8765-4321",
+      "id": 2
+    },
+    {
+      "nome": "Antônio da Silva",
+      "email": "antonio@gmail.com",
+      "fone": "1434-6543",
+      "id": 3
+    },
+    {
+      "nome": "asdfsdf",
+      "email": "asdfasd!@asdf.com",
+      "fone": "3414123",
+      "id": 4
+    }
+  ],
+  "produtos": [
+    {
+      "categoria": "Placa de vídeo",
+      "modelo": "nVidia RTX 3080",
+      "fabricante": "Asus",
+      "id": 1
+    },
+    {
+      "categoria": "Processador",
+      "modelo": "Ryzen 5 5600x",
+      "fabricante": "AMD",
+      "id": 2
+    },
+    {
+      "categoria": "Placa mãe",
+      "modelo": "X570m",
+      "fabricante": "Asus",
+      "id": 3
+    }
+  ]
+}
