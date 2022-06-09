@@ -34,6 +34,12 @@
   </main>
 
   <script>
+
+    // function onLoad() {
+    //   parent.document.getElementsByTagName("iframe")[0].src = "cadastraClientes.html"
+    // }
+
+
     function display(obj) {
       let linha = "<tr>"
       for (let prop in obj) {
@@ -72,7 +78,7 @@
           "Content-type": "application/json; charset=UTF-8"
         }
       })
-      parent.document.getElementsByTagName("iframe")[0].src = "cadastraClientes.html"
+      // parent.document.getElementsByTagName("iframe")[0].src = "cadastraClientes.html"
     }
 
     function apagarCliente(idApagar) {

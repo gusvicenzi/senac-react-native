@@ -23,6 +23,12 @@
       "email": "asdfasd!@asdf.com",
       "fone": "3414123",
       "id": 4
+    },
+    {
+      "nome": "Tobias",
+      "email": "aaaaaaa",
+      "fone": "000000-000",
+      "id": 5
     }
   ],
   "produtos": [

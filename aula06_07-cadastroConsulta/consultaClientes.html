@@ -71,7 +71,6 @@
       fetch("http://localhost:3000/clientes/" + id, {
         method: "DELETE"
       })
-      parent.document.getElementsByTagName("iframe")[0].src = "consultaClientes.html"
     }
 
     function editarItem(id) {
@@ -130,7 +129,6 @@
           "Content-type": "application/json; charset=UTF-8"
         }
       })
-      parent.document.getElementsByTagName("iframe")[0].src = "consultaClientes.html"
     }
   </script>
 </body>
