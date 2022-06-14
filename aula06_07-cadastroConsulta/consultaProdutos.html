@@ -32,9 +32,25 @@
       </tbody>
     </table>
 
-    <div id="editarItem">
+    <div id="modal" class="editarItem">
+      <div class="edicao modal-content">
+        <div class="inputItem">
+          <label for="categoria">Categoria:</label>
+          <input type="text" id="categoria" placeholder="${item.categoria}" title="Editar categoria">
+        </div>
+        <div class="inputItem">
+          <label for="modelo">Modelo:</label>
+          <input type="text" id="modelo" placeholder="${item.modelo}" title="Editar modelo">
+        </div>
+        <div class="inputItem">
+          <label for="fabricante">Fabricante:</label>
+          <input type="text" id="fabricante" placeholder="${item.fabricante}" title="Editar fabricante">
+        </div>
 
-    </div>
+        <div class="botoesEditarItem">
+          <button id="botaoSalvarEdicao">Salvar</button>
+          <button id="botaoCancelarEdicao" onclick="cancelarEdicao()">Cancelar</button>
+        </div>
   </main>
 
 
@@ -73,7 +89,7 @@
       fetch("http://localhost:3000/produtos/" + id, {
         method: "DELETE"
       })
-      // parent.document.getElementsByTagName("iframe")[0].src = "consultaProdutos.html"
+      parent.document.getElementsByTagName("iframe")[0].src = "consultaProdutos.html"
     }
 
     function editarItem(id) {
@@ -81,25 +97,12 @@
       fetch("http://localhost:3000/produtos/" + id)
         .then(x => x.json())
         .then(item => {
-          let div = document.getElementById("editarItem")
-          linha = `<div class="edicao">
-            <div class="inputItem">
-                  <label for="categoria">Categoria:</label>
-                  <input type="text" id="categoria" placeholder="${item.categoria}" title="Editar categoria">
-              </div>
-              <div class="inputItem">
-                  <label for="modelo">Modelo:</label>
-                  <input type="text" id="modelo" placeholder="${item.modelo}" title="Editar modelo" >
-              </div>
-              <div class="inputItem">
-                  <label for="fabricante">Fabricante:</label>
-                  <input type="text" id="fabricante" placeholder="${item.fabricante}" title="Editar fabricante" >
-              </div>
-              
-              <button onclick="salvarEdicao(categoria, modelo, fabricante, ${id})">Salvar</button>
-              </div>
-            `
-          div.innerHTML = linha
+          document.getElementById("modal").style.display = "block";
+          document.getElementById("categoria").setAttribute("value", `${item.categoria}`)
+          document.getElementById("modelo").setAttribute("value", `${item.modelo}`)
+          document.getElementById("fabricante").setAttribute("value", `${item.fabricante}`)
+          document.getElementById("botaoSalvarEdicao").setAttribute("onclick", `salvarEdicao(categoria, modelo, fabricante, ${id})`)
+
         })
         .catch(e => console.log(`Deu ruim: ${e}`))
 
@@ -132,7 +135,17 @@
           "Content-type": "application/json; charset=UTF-8"
         }
       })
-      // parent.document.getElementsByTagName("iframe")[0].src = "consultaProdutos.html"
+      parent.document.getElementsByTagName("iframe")[0].src = "consultaProdutos.html"
+    }
+
+    function cancelarEdicao() {
+      document.getElementById("modal").style.display = "none"
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        cancelarEdicao()
+      }
     }
   </script>
 </body>

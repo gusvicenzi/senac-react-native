@@ -31,8 +31,25 @@
       </tbody>
     </table>
 
-    <div id="editarItem">
-
+    <div id="modal" class="editarItem">
+      <div class="edicao modal-content">
+        <div class="inputItem">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" placeholder="${item.nome}" title="Editar nome">
+        </div>
+        <div class="inputItem">
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="${item.email}" title="Editar e-mail">
+        </div>
+        <div class="inputItem">
+          <label for="fone">Telefone:</label>
+          <input type="tel" id="fone" placeholder="${item.fone}" title="Editar telefone">
+        </div>
+        <div class="botoesEditarItem">
+          <button id="botaoSalvarEdicao">Salvar</button>
+          <button id="botaoCancelarEdicao" onclick="cancelarEdicao()">Cancelar</button>
+        </div>
+      </div>
     </div>
 
   </main>
@@ -46,14 +63,14 @@
           let tabela = document.getElementsByTagName('tbody')[0]
           tabela.innerHTML = ""
           y.forEach(dado => {
-            let item = display(dado)
+            let item = displayTabela(dado)
             tabela.innerHTML += item
           })
         })
         .catch(e => console.log(`Deu ruim: ${e}`))
     }
 
-    function display(obj) {
+    function displayTabela(obj) {
       let linha = "<tr>"
       for (let prop in obj) {
         linha += `<td>${obj[prop]}</td>`
@@ -74,29 +91,17 @@
     }
 
     function editarItem(id) {
+      // Abrir modal
+      document.getElementById("modal").style.display = "block";
+
       let linha = ""
       fetch("http://localhost:3000/clientes/" + id)
         .then(x => x.json())
         .then(item => {
-          let div = document.getElementById("editarItem")
-          linha = `<div class="edicao">
-            <div class="inputItem">
-                  <label for="nome">Nome:</label>
-                  <input type="text" id="nome" placeholder="${item.nome}" title="Editar nome">
-              </div>
-              <div class="inputItem">
-                  <label for="email">Email:</label>
-                  <input type="email" id="email" placeholder="${item.email}" title="Editar e-mail" >
-              </div>
-              <div class="inputItem">
-                  <label for="fone">Telefone:</label>
-                  <input type="tel" id="fone" placeholder="${item.fone}" title="Editar telefone" >
-              </div>
-              
-              <button onclick="salvarEdicao(nome, email, fone, ${id})">Salvar</button>
-              </div>
-            `
-          div.innerHTML = linha
+          document.getElementById("nome").setAttribute("value", `${item.nome}`)
+          document.getElementById("email").setAttribute("value", `${item.email}`)
+          document.getElementById("fone").setAttribute("value", `${item.fone}`)
+          document.getElementById("botaoSalvarEdicao").setAttribute("onclick", `salvarEdicao(nome, email, fone, ${id})`)
         })
         .catch(e => console.log(`Deu ruim: ${e}`))
 
@@ -129,6 +134,17 @@
           "Content-type": "application/json; charset=UTF-8"
         }
       })
+      parent.document.getElementsByTagName("iframe")[0].src = "cadastraClientes.html"
+    }
+
+    function cancelarEdicao() {
+      document.getElementById("modal").style.display = "none"
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        cancelarEdicao()
+      }
     }
   </script>
 </body>

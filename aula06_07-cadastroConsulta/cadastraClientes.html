@@ -34,12 +34,6 @@
   </main>
 
   <script>
-
-    // function onLoad() {
-    //   parent.document.getElementsByTagName("iframe")[0].src = "cadastraClientes.html"
-    // }
-
-
     function display(obj) {
       let linha = "<tr>"
       for (let prop in obj) {
@@ -78,13 +72,7 @@
           "Content-type": "application/json; charset=UTF-8"
         }
       })
-      // parent.document.getElementsByTagName("iframe")[0].src = "cadastraClientes.html"
-    }
-
-    function apagarCliente(idApagar) {
-      fetch("http://localhost:3000/clientes/" + idApagar.value, {
-        method: "DELETE"
-      })
+      parent.document.getElementsByTagName("iframe")[0].src = "cadastraClientes.html"
     }
   </script>
 </body>
