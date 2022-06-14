@@ -21,8 +21,14 @@
     {
       "nome": "Gustavo Vicenzi",
       "email": "gusvicenzi12@gmail.com",
-      "fone": "+5547992696208",
+      "fone": "47992696208",
       "id": 4
+    },
+    {
+      "nome": "alou bom dia",
+      "email": "asjdf!@asdf.com",
+      "fone": "9999999",
+      "id": 5
     }
   ],
   "produtos": [
@@ -43,6 +49,12 @@
       "modelo": "X570m",
       "fabricante": "Asus",
       "id": 3
+    },
+    {
+      "categoria": "testando",
+      "modelo": "fasdf",
+      "fabricante": "jujujuj",
+      "id": 4
     }
   ]
 }

@@ -36,15 +36,15 @@
       <div class="edicao modal-content">
         <div class="inputItem">
           <label for="categoria">Categoria:</label>
-          <input type="text" id="categoria" placeholder="${item.categoria}" title="Editar categoria">
+          <input type="text" id="categoria" placeholder="Digite a categoria" title="Editar categoria">
         </div>
         <div class="inputItem">
           <label for="modelo">Modelo:</label>
-          <input type="text" id="modelo" placeholder="${item.modelo}" title="Editar modelo">
+          <input type="text" id="modelo" placeholder="Digite o modelo" title="Editar modelo">
         </div>
         <div class="inputItem">
           <label for="fabricante">Fabricante:</label>
-          <input type="text" id="fabricante" placeholder="${item.fabricante}" title="Editar fabricante">
+          <input type="text" id="fabricante" placeholder="Digite o fabricante" title="Editar fabricante">
         </div>
 
         <div class="botoesEditarItem">
@@ -72,16 +72,21 @@
 
     function display(obj) {
       let linha = "<tr>"
+      let cat = ""
+      let mod = ""
+      let fab = ""
       for (let prop in obj) {
         linha += `<td>${obj[prop]}</td>`
+        cat = obj["categoria"]
+        mod = obj["modelo"]
+        fab = obj["fabricante"]
         if (prop == "id") {
           let id = obj["id"]
-          linha += `<td><button onclick="editarItem(${id})"><i class="fa-solid fa-file-pen"></i></button></td>
+          linha += `<td><button onclick="editarItem(${id},'${cat}','${mod}','${fab}')"><i class="fa-solid fa-file-pen"></i></button></td>
           <td><button onclick="apagarItem(${id})"><i class="fa-solid fa-trash-can"></i></button></td>`
         }
       }
       linha += "</tr>"
-      // console.log(linha);
       return linha
     }
 
@@ -89,24 +94,17 @@
       fetch("http://localhost:3000/produtos/" + id, {
         method: "DELETE"
       })
-      parent.document.getElementsByTagName("iframe")[0].src = "consultaProdutos.html"
     }
 
-    function editarItem(id) {
-      let linha = ""
-      fetch("http://localhost:3000/produtos/" + id)
-        .then(x => x.json())
-        .then(item => {
-          document.getElementById("modal").style.display = "block";
-          document.getElementById("categoria").setAttribute("value", `${item.categoria}`)
-          document.getElementById("modelo").setAttribute("value", `${item.modelo}`)
-          document.getElementById("fabricante").setAttribute("value", `${item.fabricante}`)
-          document.getElementById("botaoSalvarEdicao").setAttribute("onclick", `salvarEdicao(categoria, modelo, fabricante, ${id})`)
+    function editarItem(id, categoria, modelo, fabricante) {
+      // Abrir modal
+      document.getElementById("modal").style.display = "block";
 
-        })
-        .catch(e => console.log(`Deu ruim: ${e}`))
+      document.getElementById("categoria").setAttribute("value", categoria)
+      document.getElementById("modelo").setAttribute("value", modelo)
+      document.getElementById("fabricante").setAttribute("value", fabricante)
 
-
+      document.getElementById("botaoSalvarEdicao").setAttribute("onclick", `salvarEdicao(categoria, modelo, fabricante, ${id})`)
     }
 
     function salvarEdicao(categoria, modelo, fabricante, id) {
@@ -117,32 +115,31 @@
         categoria: categoria.value
       } : false
 
-      modelo.value ? obj = {
+      modelo.value  ? obj = {
         ...obj,
         modelo: modelo.value
       } : false
 
-      fabricante.value ? obj = {
+      fabricante.value  ? obj = {
         ...obj,
         fabricante: fabricante.value
       } : false
 
       console.log(obj);
-      fetch("http://localhost:3000/clientes/" + id, {
+      fetch("http://localhost:3000/produtos/" + id, {
         method: "PATCH",
         body: JSON.stringify(obj),
         headers: {
           "Content-type": "application/json; charset=UTF-8"
         }
       })
-      parent.document.getElementsByTagName("iframe")[0].src = "consultaProdutos.html"
     }
 
     function cancelarEdicao() {
       document.getElementById("modal").style.display = "none"
     }
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
       if (event.target == modal) {
         cancelarEdicao()
       }
