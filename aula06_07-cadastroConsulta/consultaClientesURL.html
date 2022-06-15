@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/consulta.css">
+  <!-- Fontawesome (icons) -->
+  <script src="https://kit.fontawesome.com/eb2e89ba7a.js" crossorigin="anonymous"></script>
+  <title>Consulta Vendas</title>
+</head>
+
+<body onload="load()">
+
+  <header>
+    <h1>Consultar Clientes</h1>
+  </header>
+
+  <main>
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Email</th>
+          <th>Fone</th>
+          <th>id</th>
+          <th colspan="2">Funções</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </main>
+
+
+  <script>
+    function load() {
+      fetch("http://localhost:3000/clientes")
+        .then(x => x.json())
+        .then(y => {
+          let tabela = document.getElementsByTagName('tbody')[0]
+          tabela.innerHTML = ""
+          y.forEach(dado => {
+            let item = display(dado)
+            tabela.innerHTML += item
+          })
+        })
+        .catch(e => console.log(`Deu ruim: ${e}`))
+    }
+
+    function display(obj) {
+      let linha = "<tr>"
+      let nom = ""
+      let ema = ""
+      let tel = ""
+      for (let prop in obj) {
+        linha += `<td>${obj[prop]}</td>`
+        nom = obj["nome"]
+        ema = obj["email"]
+        tel = obj["fone"]
+        if (prop == "id") {
+          let id = obj["id"]
+          linha += `<td><a href="editarCliente.html?id=${id}"><button><i class="fa-solid fa-user-pen"></i></button></a></td>
+          <td><button onclick="apagarItem(${id})"><i class="fa-solid fa-trash-can"></i></button></td>`
+        }
+      }
+      linha += "</tr>"
+      return linha
+    }
+
+    function apagarItem(id) {
+      fetch("http://localhost:3000/clientes/" + id, {
+        method: "DELETE"
+      })
+    }
+
+    
+  </script>
+</body>
+
+</html>
