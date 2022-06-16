@@ -12,6 +12,7 @@ interface produto {
     categoria: string
     descricao: string
     preco: number
+    obsevacoes?: string
 }
 
 let p1: produto = {
@@ -20,7 +21,8 @@ let p1: produto = {
     marca: "Asus",
     categoria: "Placa de vídeo",
     descricao: "RTX 3090",
-    preco: 12500.00
+    preco: 12500.00,
+    obsevacoes: "Embalar muito bem"
 }
 
 let p2: produto = {
@@ -32,7 +34,7 @@ let p2: produto = {
     preco: 3890.00
 }
 
-let produtos: produto[] = [p1, p2]
+let carrinho: produto[] = [p1, p2]
 
 let p3: produto = {
     idProduto: 2,
@@ -43,7 +45,7 @@ let p3: produto = {
     preco: 2990.90
 }
 
-produtos.push(p3)
+carrinho.push(p3)
 
 function valorTotal(carrinho: produto[]): number {
     let total: number = 0
@@ -54,7 +56,7 @@ function valorTotal(carrinho: produto[]): number {
     return total
 }
 
-console.log(produtos);
-console.log(`O valor todal da compra é: R$${valorTotal(produtos).toFixed(2)}`);
+console.log(carrinho);
+console.log(`O valor todal da compra é: R$${valorTotal(carrinho).toFixed(2)}`);
 
 
