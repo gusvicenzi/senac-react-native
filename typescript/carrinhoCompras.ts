@@ -33,6 +33,10 @@ let p2: produto = {
     descricao: "Ryzen 7 5800x",
     preco: 3890.00
 }
+interface carrinho {
+    produtos: produto[]
+    valorTotal?: number
+}
 
 let carrinho: produto[] = [p1, p2]
 
@@ -47,9 +51,10 @@ let p3: produto = {
 
 carrinho.push(p3)
 
-function valorTotal(carrinho: produto[]): number {
+function valorTotal(carrinho: carrinho): number {
+    let produtos = carrinho.produtos
     let total: number = 0
-    total = carrinho.reduce((acumulador, produto) => {
+    total = produtos.reduce((acumulador, produto) => {
         return acumulador += produto.quantidade * produto.preco
     }, 0)
 
