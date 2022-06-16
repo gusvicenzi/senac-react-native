@@ -8,6 +8,7 @@
 interface produto {
     idProduto: number
     marca: string
+    quantidade: number
     categoria: string
     descricao: string
     preco: number
@@ -15,6 +16,7 @@ interface produto {
 
 let p1: produto = {
     idProduto: 0,
+    quantidade: 2,
     marca: "Asus",
     categoria: "Placa de vídeo",
     descricao: "RTX 3090",
@@ -23,6 +25,7 @@ let p1: produto = {
 
 let p2: produto = {
     idProduto: 1,
+    quantidade: 1,
     marca: "AMD",
     categoria: "Processador",
     descricao: "Ryzen 7 5800x",
@@ -31,16 +34,27 @@ let p2: produto = {
 
 let produtos: produto[] = [p1, p2]
 
+let p3: produto = {
+    idProduto: 2,
+    quantidade: 1,
+    marca: "ASUS",
+    categoria: "Placa mãe",
+    descricao: "X570 M",
+    preco: 2990.90
+}
+
+produtos.push(p3)
+
 function valorTotal(carrinho: produto[]): number {
     let total: number = 0
     total = carrinho.reduce((acumulador, produto) => {
-        return acumulador += produto.preco
+        return acumulador += produto.quantidade * produto.preco
     }, 0)
 
     return total
 }
 
 console.log(produtos);
-console.log(valorTotal(produtos));
+console.log(`O valor todal da compra é: R$${valorTotal(produtos).toFixed(2)}`);
 
 
