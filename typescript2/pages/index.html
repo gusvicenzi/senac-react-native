@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../scripts/calculo.js"></script>
+</head>
+
+<body>
+    <input type="number" id="n1" placeholder="Informe numero" step="0.001">
+    <input type="number" id="n2" placeholder="Informe numero" step="0.001">
+    <select name="funcao" id="funcaoSelect">
+        <option value="somar">Somar</option>
+        <option value="subtrair">Subtrair</option>
+        <option value="multiplicar">Multiplicar</option>
+        <option value="dividir">Divir</option>
+    </select>
+    <!-- <button onclick="soma(n1.value, n2.value)">Calcular</button> -->
+    <button onclick="calcular()">Calcular</button>
+
+    <script>
+        function calcular() {
+            let n1 = parseFloat(document.getElementById("n1").value)
+            let n2 = parseFloat(document.getElementById("n2").value)
+            const func = document.getElementById("funcaoSelect").value
+
+            let retorno
+            switch (func) {
+                case 'somar':
+                    retorno = somar(n1, n2)
+                    alert(`A soma é: ${retorno}`)
+                    break;
+                case 'subtrair':
+                    retorno = subtrair(n1, n2)
+                    alert(`A subtração é: ${retorno}`)
+                    break;
+                case 'multiplicar':
+                    retorno = multiplicar(n1, n2)
+                    alert(`A multiplicação é: ${retorno}`)
+                    break;
+                case 'dividir':
+                    retorno = dividir(n1, n2)
+                    alert(`A divisão é: ${retorno.toFixed(2)}`)
+                    break;
+                default:
+                    break;
+            }
+
+            // if (func === "somar") {
+            //     const retorno = somar(n1, n2)
+            //     alert(`A soma é: ${retorno.toFixed(2)}`)
+            // } else if (func === "subtrair") {
+            //     const retorno = subtrair(n1, n2)
+            //     alert(`A subtração é: ${retorno.toFixed(2)}`)
+            // } else if (func === "multiplicar") {
+            //     const retorno = multiplicar(n1, n2)
+            //     alert(`A multiplicação é: ${retorno.toFixed(2)}`)
+            // } else if (func === "dividir") {
+            //     const retorno = dividir(n1, n2)
+            //     alert(`A divisão é: ${retorno.toFixed(2)}`)
+            // }
+        }
+    </script>
+</body>
+
+</html>
