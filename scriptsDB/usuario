@@ -1,0 +1,12 @@
+create table usuario(
+	id serial primary key,
+	email varchar(50) unique,
+	senha varchar(200)
+);
+
+insert into usuario(email, senha)
+values ('fulano@gmail.com', '123')
+
+
+select * from usuario
+where email = 'jose@gmail.com' and senha = '123'

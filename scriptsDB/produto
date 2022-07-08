@@ -1,0 +1,48 @@
+-- TABELA DE PRODUTO
+
+create table produto (
+	id serial primary key,
+	descricao varchar(20),
+	preco float
+);
+-- MELHOR USAR
+create table produto (
+	id serial primary key,
+	descricao varchar(20),
+	preco numeric(5,2),
+	categoria_id int
+);
+
+select * from produto;
+
+insert into produto(descricao, preco, categoria_id)
+values('Alface', 3.99, 2);
+
+insert into produto(descricao, preco, categoria_id)
+values('Repolho', 3.20, 2);
+
+delete from produto;
+
+ALTER TABLE produto
+ADD categoria_id int;
+
+ALTER TABLE produto
+DROP categoria;
+
+alter table produto
+add column estoque float;
+
+drop table produto;
+
+alter table produto
+add constraint fk_categoria foreign key (categoria_id) references categoria(id);
+
+select * from produto
+where categoria_id = 1;
+
+select * from produto
+where descricao like 'R%';
+
+select p.descricao, p.preco, p.estoque, c.descricao as categoria
+from produto p, categoria c
+where p.categoria_id = c.id;

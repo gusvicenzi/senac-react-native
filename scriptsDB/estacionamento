@@ -1,0 +1,104 @@
+create table cliente (
+	id serial primary key,
+	nome varchar(50)
+);
+
+create table carro (
+	id serial primary key,
+	marca varchar(50),
+	placa varchar(8)
+);
+
+create table carro_cliente (
+	cliente_id int,
+	carro_id int,
+	foreign key (cliente_id) references cliente(id),
+	foreign key (carro_id) references carro(id)
+);
+
+alter table carro_cliente
+add constraint fk_carro foreign key (carro_id) references carro(id);
+
+alter table carro_cliente
+add constraint fk_cliente foreign key (cliente_id)
+references cliente(id);
+
+select * from carro;
+select * from cliente;
+select * from carro_cliente;
+
+select p.nome, c.placa
+from cliente p, carro c
+where p.id = c.id and p.carro_id = c.id;
+
+insert into cliente(nome)
+values('Lucas');
+insert into cliente(nome)
+values('Gustavo');
+insert into cliente(nome)
+values('Marcel');
+
+insert into carro(marca, placa)
+values('VW', 'ALO-2424');
+insert into carro(marca, placa)
+values('VW', 'TOP-1998');
+insert into carro(marca, placa)
+values('FIAT', 'OLA-1010');
+
+insert into carro_cliente(cliente_id, carro_id)
+values(1,3);
+insert into carro_cliente(cliente_id, carro_id)
+values(1,1);
+insert into carro_cliente(cliente_id, carro_id)
+values(2,3);
+insert into carro_cliente(cliente_id, carro_id)
+values(3,2);
+
+drop table carro;
+drop table cliente;
+drop table carro_cliente;
+
+insert into carro(marca)
+values('VW');
+
+update carro set
+placa = 'ALU-3467',
+marca = 'GM'
+where id = 4;
+
+select cc.cliente_id as cliente, cc.carro_id, ca.placa, ca.marca
+from carro_cliente cc, carro ca
+where cc.carro_id = ca.id
+and cc.cliente_id = 1;
+
+-- Listar nome dos clientes, placa e marca dos veículos
+select cl.nome as cliente, ca.placa, ca.marca
+from carro_cliente cc, carro ca, cliente cl
+where cc.carro_id = ca.id
+and cc.cliente_id = cl.id
+and cl.nome like 'Lu%'
+and ca.placa like '%4'	-- like para buscar no texto. % é "coringa"
+and ca.placa = 'OLA-1010'	-- exatamente igual a placa
+
+-- autorrelacionamento
+create table funcionario (
+	id serial primary key,
+	nome varchar(40),
+	gerente_id int,
+	foreign key (gerente_id) references funcionario(id)
+);
+
+insert into funcionario(nome)
+values ('Jurandir');
+insert into funcionario(nome, gerente_id)
+values ('Jaime', 1);
+insert into funcionario(nome, gerente_id)
+values ('Cleber', 1);
+insert into funcionario(nome, gerente_id)
+values ('Joelma', 3);
+
+select f.nome as funcionario, g.nome as gerente
+from funcionario f, funcionario g
+where f.gerente_id = g.id
+
+select * from funcionario
