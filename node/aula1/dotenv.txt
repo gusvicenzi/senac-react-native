@@ -1,0 +1,2 @@
+// rename this file as .env
+DB_CONECTION_KEY="add connection key here"
