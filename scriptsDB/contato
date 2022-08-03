@@ -1,0 +1,13 @@
+create table contato(
+    id serial primary key,
+    nome varchar(50),
+    fone varchar(15),
+    email varchar(50)
+)
+
+-- insert into contato(nome, fone, email)
+-- values($1::text, $2::text, $3::text);
+insert into contato(nome, fone, email)
+values('joao', '22222222', 'joao@gmail.com')
+
+select * from contato;
