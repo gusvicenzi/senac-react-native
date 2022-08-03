@@ -37,6 +37,8 @@ insert into cliente(nome)
 values('Gustavo');
 insert into cliente(nome)
 values('Marcel');
+insert into cliente(nome)
+values('Adriana');
 
 insert into carro(marca, placa)
 values('VW', 'ALO-2424');
@@ -102,3 +104,14 @@ from funcionario f, funcionario g
 where f.gerente_id = g.id
 
 select * from funcionario
+
+select * from cliente
+where id = 2
+
+-- Listar nome do cliente e a placa e marca dos seus veículos
+select cl.nome as cliente, ca.placa, ca.marca
+from carro_cliente cc, carro ca, cliente cl
+where cc.carro_id = ca.id
+and cc.cliente_id = cl.id
+and cl.id = 1
+
