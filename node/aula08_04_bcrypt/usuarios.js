@@ -1,15 +1,13 @@
 const express = require('express')
+const router = express.Router()
 const pg = require('pg')
 const bcrypt = require('bcrypt')
-const app = express()
+const jwt = require('jsonwebtoken')
 
 // Conexão DB postgresql
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
 
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
-
-app.route('/usuarios')
+router.route('/')
     .get((req, res) => {
         pool.connect((err, client, release) => {
             if (err) {
@@ -60,7 +58,7 @@ app.route('/usuarios')
         })
     })
 
-app.route('/usuarios/login')
+router.route('/login')
     .post((req, res) => {
         pool.connect((err, client, release) => {
             const sql = `select * from usuarios where email = $1`
@@ -69,7 +67,12 @@ app.route('/usuarios/login')
                 if (result.rowCount > 0) {
                     bcrypt.compare(req.body.senha, result.rows[0].senha, (error, resultado) => {
                         if (resultado) {
-                            return res.send({ token: 'Usuário conectado'})
+                            let token = jwt.sign({
+                                nome: result.rows[0].nome,
+                                email: result.rows[0].email,
+                                perfil: result.rows[0].perfil
+                            }, process.env.JWT_KEY)
+                            return res.send({ token })
                         } else {
                             return res.status(403).send({
                                 message: "Senha incorreta"
@@ -82,11 +85,8 @@ app.route('/usuarios/login')
                     })
                 }
             })
+            release()
         })
     })
 
-const PORT = process.env.PORT
-
-app.listen(PORT, () => {
-    console.log(`Servidor executando em http://localhost:${PORT}`)
-})
+module.exports = router
