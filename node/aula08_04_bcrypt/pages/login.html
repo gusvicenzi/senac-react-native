@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login de usuário</title>
+    <script src="../jwt-decode.js"></script>
+    <script src="../login.js"></script>
+    <link rel="stylesheet" href="../styles/login.css">
 </head>
 
 <body>
@@ -14,23 +17,8 @@
         <label for="senha">Senha</label>
         <input type="password" id="senha" placeholder="Digite sua senha">
         <button onclick="logar()">Entrar</button>
+        <button onclick="decodeToken()">decodificar</button>
     </main>
-
-    <script>
-        function logar() {
-            const user = {
-                email: document.getElementById('email').value,
-                senha: document.getElementById('senha').value,
-            }
-            fetch('http://localhost:3000/usuarios/login', {
-                method: "POST",
-                body: JSON.stringify(user),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
-            }).then(data => data.json())
-            .then(result => localStorage.setItem('userToken', result.token ))
-            .then(_ => console.log(localStorage.getItem('userToken')))
-        }
-    </script>
 </body>
 
 </html>

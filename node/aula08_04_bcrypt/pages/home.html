@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <script src="../jwt-decode.js"></script>
+    <script src="../login.js"></script>
+</head>
+<body>
+    <main>
+        <fieldset>
+            <legend id="legend"></legend>
+            <h1 id="bem-vindo"></h1>
+            <h3 id="categoria"></h3>
+        </fieldset>
+    </main>
+
+    <script>
+        const decodedToken = decodeToken()
+        console.log(typeof decodedToken)
+        document.getElementById('bem-vindo').innerText = `Seja bem-vindo, ${decodedToken.nome}`
+        document.getElementById('categoria').innerText = `Perfil: ${decodedToken.perfil}`
+        document.getElementById('legend').innerText = `${decodedToken.email}`
+    </script>
+</body>
+</html>
