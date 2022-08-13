@@ -1,23 +1,27 @@
 import * as express from "express"
-import { Request, Response } from "express"
+import { myDataSource } from "./app-data-source"
+import userRoutes from './routes/users'
+import productRoutes from './routes/products'
 
+// establish database connection
+myDataSource
+    .initialize()
+    .then(() => {
+        console.log("Data Source has been initialized!")
+    })
+    .catch((err) => {
+        console.error("Error during Data Source initialization:", err)
+    })
+
+// create and setup express app
 const app = express()
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
-app.route('/user')
-    .get((req: Request, res: Response) => {
-        res.send({
-            message: 'Ola'
-        })
-    })
-    .post((req: Request, res: Response) => {
-        // let user = {
-        //     nome: req.body.nome,
-        //     email: req.body.email,
-        //     idade: req.body.idade
-        // }
-        res.json(req.body)
-    })
+// use routes
+app.use('/user', userRoutes)
+app.use('/product', productRoutes)
+
 
 const PORT = process.env.PORT
 app.listen(PORT, () => {
