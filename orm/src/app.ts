@@ -1,17 +1,17 @@
 import * as express from "express"
-import { myDataSource } from "./app-data-source"
+// import { myDataSource } from "./app-data-source"
 import userRoutes from './routes/users'
 import productRoutes from './routes/products'
 
-// establish database connection
-myDataSource
-    .initialize()
-    .then(() => {
-        console.log("Data Source has been initialized!")
-    })
-    .catch((err) => {
-        console.error("Error during Data Source initialization:", err)
-    })
+// // establish database connection
+// myDataSource
+//     .initialize()
+//     .then(() => {
+//         console.log("Data Source has been initialized!")
+//     })
+//     .catch((err) => {
+//         console.error("Error during Data Source initialization:", err)
+//     })
 
 // create and setup express app
 const app = express()
