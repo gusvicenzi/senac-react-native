@@ -4,16 +4,6 @@ import { Request, Response } from "express"
 import { myDataSource } from "../app-data-source"
 import { Product } from "../entity/Product"
 
-// establish database connection
-myDataSource
-    .initialize()
-    .then(() => {
-        console.log("Data Source has been initialized!")
-    })
-    .catch((err) => {
-        console.error("Error during Data Source initialization:", err)
-    })
-
 const router = express.Router()
 
 router.route('/')

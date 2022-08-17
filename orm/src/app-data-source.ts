@@ -1,5 +1,8 @@
 import { DataSource } from "typeorm"
+import { Categoria } from "./entity/desafio/Categoria"
+import { Produto } from "./entity/desafio/Produto"
 import { Product } from "./entity/Product"
+import { Profile } from "./entity/profile"
 import { User } from "./entity/User"
 
 export const myDataSource = new DataSource({
@@ -10,7 +13,7 @@ export const myDataSource = new DataSource({
     password: "123456",
     database: "postgres",
     // entities: [".src/entity/*.ts"],
-    entities: [User, Product],
+    entities: [User, Product, Profile, Categoria, Produto],
     // entities: ["dist/**/*./entity/*.ts"],
     // entities: ["dist/**/*.entity.js"],
     logging: false,
