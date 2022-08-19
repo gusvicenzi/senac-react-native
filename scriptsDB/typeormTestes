@@ -1,0 +1,29 @@
+select * from tb_profile;
+
+insert into tb_profile(gender, photo)
+values('Feminino', 'foto2.png');
+
+select * from tb_user;
+
+insert into tb_user(nome, email, idade, profileId)
+values('Lucas', 'lucas@gmail.com', 23, 1);
+
+
+
+
+
+
+-- Desafio
+select * from tb_categoria;
+
+insert into tb_categoria(nome)
+values('placa de video');
+insert into tb_categoria(nome)
+values('processador');
+
+select * from tb_produto;
+
+insert into tb_produto(descricao, preco, estoque, id_categoria)
+values('RTX 3090', 11899.90, 23, 1);
+insert into tb_produto(descricao, preco, estoque, id_categoria)
+values('Ryzen 5800x', 3200.00, 12, 2);
