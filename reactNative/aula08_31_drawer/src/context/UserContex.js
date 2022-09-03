@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useState } from 'react'
 
 const userContextTemplate = [{
     nome: 'Joao',
@@ -15,11 +15,14 @@ const userContextTemplate = [{
 const UserContext = createContext()
 
 const UserProvider = ({ children }) => {
+
+    const [list, setList] = useState(userContextTemplate)
+
     return (
         <UserContext.Provider value={
             {
-                list: userContextTemplate,
-                setList: () => {}
+                list,
+                setList
             }
         }>
             {children}

@@ -7,8 +7,16 @@ export const Cadastro = ({ navigation, route }) => {
     const [email, setEmail] = useState('')
     const [fone, setFone] = useState('')
     const [msg, setMsg] = useState('')
+    const [resultMsg, setResultMsg] = useState('')
 
-    const { list } = useContext(UserContext)
+    const { list, setList } = useContext(UserContext)
+
+    const limpar = () => {
+        setNome('')
+        setEmail('')
+        setFone('')
+        setMsg('')
+    }
 
     const checkInputs = () => {
         if (!nome) {
@@ -23,9 +31,27 @@ export const Cadastro = ({ navigation, route }) => {
                 email,
                 fone
             }
-            // setUserList(prevList => [...prevList, contato])
+            setList(prevList => [...prevList, contato])
+            limpar()
+            setResultMsg('Contato inserido com sucesso!')
+            setTimeout(() => {setResultMsg('')}, 3000)
             // alert(JSON.stringify(contato))
         }
+    }
+
+    const saveToApi = (newContato) => {
+        fetch('http://localhost:3000/contatos',
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json', 'content-Type': 'application/json'
+                },
+                body: JSON.stringify(newContato)
+            }
+        )
+            .then(() => { setResultMsg("Registro inserido com sucesso") })
+            .then(() => limpar())
+            .catch((erro) => { setResultMsg(`Registro não foi inserido. Erro: ${erro}`) })
     }
 
     return (
@@ -41,6 +67,8 @@ export const Cadastro = ({ navigation, route }) => {
             <TouchableOpacity style={styles.button} onPress={checkInputs}>
                 <Text style={styles.buttonText}>Gravar</Text>
             </TouchableOpacity>
+
+            {<Text style={styles.alert}>{resultMsg}</Text>}
         </View>
     )
 }
